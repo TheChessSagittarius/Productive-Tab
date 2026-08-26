@@ -8,19 +8,16 @@
 </head>
 <body>
     <main class="dashboard container">
-        <section class="serach-section">
-            <div class="topnav">
-                <a class="active" href="Home">Home</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-                <form action="https://www.google.com/search" method="GET" target="_blank">
-                    <input type="text" name="q" placeholder="Search Google..." autocomplete="off" autofocus>  
-                </form>
-                
-            </div>
+        <section class="search-section">
+            <form action="https://www.google.com/search" method="GET" target="_blank">
+                <input type="text" name="q" placeholder="Search Google..." autocomplete="off" autofocus>  
+            </form>
         </section>
-
-
+        <div class="topnav">
+            <a class="active" href="Home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact </a>
+        </div>
         <section class="clock-section">
             <h1 id="clock">00:00:00</h1>
             <p id="date">Loading date...</p>
