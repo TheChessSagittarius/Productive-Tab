@@ -16,3 +16,14 @@ function updateClock(){
 
 updateClock();
 setInterval(updateClock,1000);
+
+const focusInput = document.getElementById("focus-input");
+
+const savedFocus = localStorage.getItem("userFocus");
+if(savedFocus) {
+    focus.Input.value = savedFocus;
+}
+
+focusInput.addEventListener("input", function(){
+    localStorage.setItem("userFocus", focusInput.value);
+});
