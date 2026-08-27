@@ -54,6 +54,7 @@ body {
     border-radius: 8px;
     color:#ffffff;
     outline: none;
+    text-align: center;
 }
 
 .todo-section{
