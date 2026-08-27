@@ -21,7 +21,7 @@ const focusInput = document.getElementById("focus-input");
 
 const savedFocus = localStorage.getItem("userFocus");
 if(savedFocus) {
-    focus.Input.value = savedFocus;
+    focusInput.value = savedFocus;
 }
 
 focusInput.addEventListener("input", function(){
