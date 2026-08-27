@@ -27,3 +27,43 @@ if(savedFocus) {
 focusInput.addEventListener("input", function(){
     localStorage.setItem("userFocus", focusInput.value);
 });
+
+const todoInput = document.getElementById("todo-input");
+const todoList = document.getElementById("todo-list");
+
+let tasks = JSON.parse(localStorage.getItem("savedTasks")) || [];
+
+function renderTasks(){
+    todoList.innerHTML = "";
+    tasks.forEach((taskText, index) =>{
+        const li = document.createElement("li");
+        li.textContent=taskText;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "x";
+        deleteBtn.className = "delete-btn";
+
+        deleteBtn.addEventListener("click", function(){
+            tasks.splice(index, 1);
+            saveAndRender();
+        });
+        li.appendChild(deleteBtn);
+        todoList.appendChild(li);
+    });
+}
+
+function saveAndRender(){
+    localStorage.setItem("savedTasks", JSON.stringify(tasks));
+    renderTasks();
+}
+
+todoInput.addEventListener("keydown", function(event){
+    if(event.key=== "Enter" && todoInput.value.trim() !== "") {
+        tasks.push(todoInput.value.trim());
+        todoInput.value="";
+        saveAndRender()
+    
+    }
+});
+
+renderTasks();
