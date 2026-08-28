@@ -173,6 +173,8 @@ body {
     align-items: center;
     font-size: 0.95rem;
     text-align: center;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .delete-btn{
