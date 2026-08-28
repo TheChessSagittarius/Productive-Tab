@@ -33,25 +33,6 @@ const todoList = document.getElementById("todo-list");
 
 let tasks = JSON.parse(localStorage.getItem("savedTasks")) || [];
 
-function renderTasks(){
-    todoList.innerHTML = "";
-    tasks.forEach((taskText, index) =>{
-        const li = document.createElement("li");
-        li.textContent=taskText;
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "x";
-        deleteBtn.className = "delete-btn";
-
-        deleteBtn.addEventListener("click", function(){
-            tasks.splice(index, 1);
-            saveAndRender();
-        });
-        li.appendChild(deleteBtn);
-        todoList.appendChild(li);
-    });
-}
-
 function saveAndRender(){
     localStorage.setItem("savedTasks", JSON.stringify(tasks));
     renderTasks();
@@ -59,11 +40,75 @@ function saveAndRender(){
 
 todoInput.addEventListener("keydown", function(event){
     if(event.key=== "Enter" && todoInput.value.trim() !== "") {
-        tasks.push(todoInput.value.trim());
+        const newTask = {
+            text: todoInput.value.trim(),
+            completed:false,
+            id:Date.now()
+        };
+        tasks.push(newTask);
         todoInput.value="";
         saveAndRender()
     
     }
 });
+
+function toggleTask(id){
+    tasks = tasks.map(task =>{
+        if(task.id === id){
+            return{ ...task, completed: !task.completed};
+        }
+        return task;
+    });
+    saveAndRender();
+}
+
+function deleteTask(id){
+    tasks = tasks.filter(task => task.id !==id);
+    saveAndRender();
+}
+
+function renderTasks(){
+    todoList.innerHTML= "";
+    const sortedTasks = [...tasks].sort((a,b) =>{
+        if(a.completed === b.completed){
+            return a.id - b.id;
+        }
+        return a.completed? 1: -1;
+    });
+
+    sortedTasks.forEach(task => {
+        const li = document.createElement("li");
+        const leftContent = document.createElement("div");
+        leftContent.style.display = "flex";
+        leftContent.style.alignItems = "center";
+        leftContent.style.gap = "10px";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.completed;
+        checkbox.style.cursor = "pointer";
+        checkbox.addEventListener("change", () => toggleTask(task.id));
+
+        const span = document.createElement("span");
+        span.textContent = task.text;
+
+        if(task.completed) {
+            span.style.textDecoration = "line-through";
+            span.style.color = "#888888";
+        }
+
+        leftContent.appendChild(checkbox);
+        leftContent.appendChild(span);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "x";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.addEventListener("click", () => deleteTask(task.id));
+
+        li.appendChild(leftContent);
+        li.appendChild(deleteBtn);
+        todoList.appendChild(li);
+    })
+}
 
 renderTasks();
