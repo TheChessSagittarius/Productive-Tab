@@ -23,7 +23,7 @@ Simple and clean personal dashboard inspired by designs from the Momentum extens
 To run or test the project locally:
 1. **Clone Repository**
    ```bash
-   git clone [https://github.com/TheChessSagittarius/Productive-Tab](https://github.com/TheChessSagittarius/Productive-Tab)
+   git clone https://github.com/TheChessSagittarius/Productive-Tab
 
 2. **Navigate to project folder**
    ```bash
