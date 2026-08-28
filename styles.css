@@ -172,9 +172,15 @@ body {
     justify-content: space-between;
     align-items: center;
     font-size: 0.95rem;
-    text-align: center;
+    text-align: left;
+}
+
+#todo-list li span{
+    white-space: nowrap;
     word-break: break-word;
     overflow-wrap: break-word;
+    flex: 1;
+    margin-left: 10px;
 }
 
 .delete-btn{
